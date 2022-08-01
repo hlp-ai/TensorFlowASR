@@ -33,7 +33,7 @@ def test_conformer():
     converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS, tf.lite.OpsSet.SELECT_TF_OPS]
     tflite = converter.convert()
 
-    logger.info("Converted successfully with no timestamp")
+    print("Converted successfully with no timestamp")
 
     concrete_func = model.make_tflite_function(timestamp=True).get_concrete_function()
     converter = tf.lite.TFLiteConverter.from_concrete_functions([concrete_func])
@@ -42,7 +42,7 @@ def test_conformer():
     converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS, tf.lite.OpsSet.SELECT_TF_OPS]
     converter.convert()
 
-    logger.info("Converted successfully with timestamp")
+    print("Converted successfully with timestamp")
 
     tflitemodel = tf.lite.Interpreter(model_content=tflite)
     signal = tf.random.normal([4000])
