@@ -24,14 +24,14 @@ speech_config:
   normalize_per_frame: False
 
 decoder_config:
-  vocabulary: ./vocabularies/librispeech/librispeech_train_4_1030.subwords
-  target_vocab_size: 1000
-  max_subword_length: 10
+  vocabulary: D:\dataset\librispeech\train-clean-100_4_1030.subwords
+  target_vocab_size: 1030
+  max_subword_length: 4
   blank_at_zero: True
-  beam_width: 0
+  beam_width: 6
   norm_score: True
   corpus_files:
-    - H:/MLDL/Datasets/ASR/Raw/LibriSpeech/train-clean-100/transcripts.tsv
+    - D:\dataset\librispeech\train-clean-100.trans
 
 model_config:
   name: conformer
@@ -75,7 +75,7 @@ learning_config:
           num_masks: 1
           mask_factor: 27
     data_paths:
-      - H:/MLDL/Datasets/ASR/Raw/LibriSpeech/train-clean-100/transcripts.tsv
+      - D:\dataset\librispeech\train-clean-100.trans
     tfrecords_dir: null
     shuffle: True
     cache: True
@@ -86,7 +86,7 @@ learning_config:
   eval_dataset_config:
     use_tf: True
     data_paths:
-      - H:/MLDL/Datasets/ASR/Raw/LibriSpeech/dev-clean/transcripts.tsv
+      - D:\dataset\librispeech\dev-clean.trans
     tfrecords_dir: null
     shuffle: False
     cache: True
@@ -97,7 +97,7 @@ learning_config:
   test_dataset_config:
     use_tf: True
     data_paths:
-      - H:/MLDL/Datasets/ASR/Raw/LibriSpeech/test-clean/transcripts.tsv
+      - D:\dataset\librispeech\dev-clean.trans
     tfrecords_dir: null
     shuffle: False
     cache: True
