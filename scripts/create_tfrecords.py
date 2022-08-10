@@ -13,7 +13,7 @@ parser.add_argument("--config", type=str, default=None, help="The file path of m
 
 parser.add_argument("--tfrecords_dir", type=str, default=None, help="Directory to tfrecords")
 
-parser.add_argument("--tfrecords_shards", type=int, default=16, help="Number of tfrecords shards")
+parser.add_argument("--tfrecords_shards", type=int, default=4, help="Number of tfrecords shards")
 
 parser.add_argument("--shuffle", default=False, action="store_true", help="Shuffle data or not")
 
