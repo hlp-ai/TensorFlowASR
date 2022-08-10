@@ -22,6 +22,10 @@ args.output = preprocess_paths(args.output)
 
 transcripts = []
 
+threshold_len_secs = 17
+max_len_secs = 0
+filtered  = 0
+
 text_files = glob.glob(os.path.join(args.dir, "**", "*.txt"), recursive=True)
 
 for text_file in tqdm(text_files, desc="[Loading]"):
@@ -33,6 +37,11 @@ for text_file in tqdm(text_files, desc="[Loading]"):
         audio_file = os.path.join(current_dir, line[0] + ".flac")
         y, sr = librosa.load(audio_file, sr=None)
         duration = librosa.get_duration(y, sr)
+        if duration > max_len_secs:
+            max_len_secs = duration
+        if duration > threshold_len_secs:
+            filtered += 1
+            continue
         text = unicodedata.normalize("NFC", line[1].lower())
         transcripts.append(f"{audio_file}\t{duration}\t{text}\n")
 
@@ -40,3 +49,6 @@ with open(args.output, "w", encoding="utf-8") as out:
     out.write("PATH\tDURATION\tTRANSCRIPT\n")
     for line in tqdm(transcripts, desc="[Writing]"):
         out.write(line)
+
+print("max_len_secs:", max_len_secs)
+print("Filtered:", filtered)
