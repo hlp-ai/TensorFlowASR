@@ -10,6 +10,7 @@ from tensorflow_asr.utils.file_util import preprocess_paths
 parser = argparse.ArgumentParser(prog="Setup LibriSpeech Transcripts")
 
 parser.add_argument("--dir", "-d", type=str, default=None, help="Directory of dataset")
+parser.add_argument("--max_len", type=int, default=17, help="Maximum length of audio allowed, in sec")
 
 parser.add_argument("output", type=str, default=None, help="The output .tsv transcript file path")
 
@@ -22,7 +23,7 @@ args.output = preprocess_paths(args.output)
 
 transcripts = []
 
-threshold_len_secs = 17
+threshold_len_secs = args.max_len
 max_len_secs = 0
 filtered  = 0
 
